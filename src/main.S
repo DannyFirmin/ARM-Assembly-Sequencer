@@ -8,7 +8,6 @@ main:
   bl init
   mov r8, #48000 @ Constant
 loop:
-
   mov r1, #98
   mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
   udiv r2, r1, r2 @ r2 is loop how many time
@@ -61,213 +60,148 @@ loop:
   bl play_note
 
   mov r1, #116
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #116
-  @ mov r2, #466
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #466
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #87
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #87
-  @ mov r2, #349
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  @ mov r1, #87
-  @ mov r2, #349
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, #98
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, 0
-  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
-  bl play_note
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, #116
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #116
-  @ mov r2, #466
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, 0
-  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
-  bl play_note
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, 0
-  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
-  bl play_note
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, 0
-  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
-  bl play_note
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, #116
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #116
-  @ mov r2, #466
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  mov r1, #98
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-  @ mov r1, #98
-  @ mov r2, #392
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
+  mov r2, #349
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #87
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
+  mov r2, #349
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, 0
+  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
   bl play_note
 
-  @ mov r1, #87
-  @ mov r2, #349
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
-  @ mov r1, #87
-  @ mov r2, #349
-  @ mov r3, #12000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r1, #116
+  mov r2, #466
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, 0
+  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
+  bl play_note
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, 0
+  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
+  bl play_note
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, 0
+  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
+  bl play_note
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #116
+  mov r2, #466
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #98
+  mov r2, #392
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #87
+  mov r2, #349
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+
+  mov r1, #87
+  mov r2, #349
+  mov r3, #12000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, 0
   mov r2, #4000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
@@ -320,136 +254,107 @@ loop:
   bl play_note
 
   mov r1, #130
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #130
-  @ mov r2, #532
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #130
-  @ mov r2, #532
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #532
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #130
+  mov r2, #532
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #156
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #156
-  @ mov r2, #622
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #156
-  @ mov r2, #622
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #622
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #156
+  mov r2, #622
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #130
-  mov r2, #4 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #130
-  @ mov r2, #532
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #130
-  @ mov r2, #532
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
+  mov r2, #532
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #130
+  mov r2, #532
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #196
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #196
-  @ mov r2, #466
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  @ mov r1, #196
-  @ mov r2, #466
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  @ mov r1, #196
-  @ mov r2, #466
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-
-  @ mov r1, #196
-  @ mov r2, #466
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #466
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #196
+  mov r2, #466
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #196
+  mov r2, #466
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #196
+  mov r2, #466
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, #146
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
-  udiv r2, r1, r2 @ r2 is loop how many time
-  bl play_note
-
-  @ mov r1, #146
-  @ mov r2, #440
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #146
-  @ mov r2, #440
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #146
-  @ mov r2, #440
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
-  @ mov r1, #146
-  @ mov r2, #440
-  @ mov r3, #6000
-  @ mov r9, 1   @ Counter for sequencer part
-  @ mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
-  @ mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
-  @ bl sequencer_manager
+  mov r2, #440
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #146
+  mov r2, #440
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #146
+  mov r2, #440
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
+  mov r1, #146
+  mov r2, #440
+  mov r3, #6000
+  mov r9, 1   @ Counter for sequencer part
+  mov r10, 0 @ Sound1 flag for sequencer funtion, 0 means currently in upper part of the wave
+  mov r11, 0 @ Sound2 flag for sequencer funtion, 1 means currently in lower part of the wave
+  bl sequencer_manager
 
   mov r1, 0
   mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
