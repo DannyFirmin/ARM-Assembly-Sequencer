@@ -6,17 +6,28 @@
 .type main, %function
 main:
   bl init
-  mov r11, #48000 @ Constant
+
+myinit:
+  ldr r0, =pitch_array @ Base address of the array
+  ldr r4, =duration_array
+  ldr r5, [r0] @ Load array size
+  mov r6, #1 @ Array loop counter
+
 loop:
-  mov r1, #98
-  mov r2, #2 @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
+  mov r1, #0
+  lsl r1, r6, #2 @ r1 = r6 * 4, index to offset, a faster way
+  ldr r2, [r4, r1]
+  ldr r1, [r0, r1]
+  add r6, #1
+  @ Check if pitch is equals to 0, which means rest
+  mov r3, 0 @ Temp value for calculation
+  cmp r1, r3
+  beq rest
   udiv r2, r1, r2 @ r2 is loop how many time
   bl play_envelope
-
-  mov r1, 0
-  mov r2, #12000 @ Rest 0.25s, Here 12000=0.25s, 48000=1s
-  bl play_envelope
-
+  cmp r6, r5
+  IT hi
+  bhi myinit
   b loop
 
 @ This function is used for playing a note with Envelope
@@ -25,23 +36,19 @@ loop:
 @ Param r1 - Pitch(Hz), r2 - Duration (Loop how many time)
 @ r1 = 0 means Rest
 play_envelope:
-  push {r1-r11,lr}
-  @ Check if pitch is equals to 0, which means rest
-  mov r5, 0
-  mov r6, r2 @ Use r6 as counter in rest
-  cmp r1, r5
-  beq rest
+  push {r0-r11,lr}
   @ Start doing duration/pitch/2, temp register used: r5 r6
+  mov r11, #48000
   udiv r6, r11, r1 
-  mov r5, #2
-  udiv r6, r6, r5
+  lsr r6, r6, #1
   @ Finished duration/pitch/2, result in r6, means how many dot
+  push {r6,lr} @ r5 r6 need to be used in lowdot as well, store them
   mov r5, 0 @ Counter
-  push {r5,r6,lr} @ r5 r6 need to be used in lowdot as well, store them
   bl highdot
-  pop {r5,r6,lr}
+  pop {r6,lr}
+  mov r5, 0 @ Counter
   bl lowdot
-  pop {r1-r11,lr}
+  pop {r0-r11,lr}
 
   @ Check r2, which is how many time I need to loop
   subs r2, 1
@@ -50,14 +57,18 @@ play_envelope:
   b play_envelope
 
 rest:
+  push {r0,r2,lr}
   mov r0, 0
-  push {lr}
   bl BSP_AUDIO_OUT_Play_Sample
-  pop {lr}
-  subs r6, 1
-  IT eq
-  bxeq lr @ Go back where play_envelope function is called
+  pop {r0,r2,lr}
+  subs r2, 1
+  beq rest_end @ Go back where play_envelope function is called
   b rest
+  
+rest_end:
+  cmp r6, r5
+  bhi myinit
+  b loop
 
 highdot:
   @ Start ploting based on r6
@@ -67,7 +78,8 @@ highdot:
   pop {lr}
   add r5, 1 @ Counter ++
   cmp r6, r5
-  bls dot_backhome
+  IT ls
+  bxls lr
   b highdot
 
 lowdot:
@@ -78,11 +90,17 @@ lowdot:
   pop {lr}
   add r5, 1
   cmp r6, r5
-  bls dot_backhome
+  IT ls
+  bxls lr
   b lowdot
 
-dot_backhome:
-  mov r5, 0 @ Clear counter
-  bx lr
-
 .size main, .-main
+
+.data
+@ First element in array in the size
+pitch_array:
+  .word 24, 0, 294, 0, 349, 0, 392, 0, 294, 0, 349, 0, 415, 392, 0, 294, 0, 349, 0, 392, 0, 349, 0, 294, 0
+duration_array:
+ @ Duration divisor. r2 = 4 means 0.25s, r2 = 2 means 0.5s, r2 = 1 means 1s
+  .word 24, 12000, 4, 12000, 4, 12000, 2, 12000, 4, 12000, 4, 12000, 4, 2, 24000, 4, 12000, 4, 12000, 2, 12000, 4, 12000, 1, 12000
+  @ Rest 0.25s, Here 12000=0.25s, 48000=1s
