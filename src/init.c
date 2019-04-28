@@ -9,7 +9,7 @@ void init(void)
   /* Configure the system clock to have a frequency of 80 MHz */
   SystemClock_Config();
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, 50, AUDIO_FREQUENCY_48K);
-  // bufferSound(12345);
+  bufferSound(12345);
 }
 
 /**
