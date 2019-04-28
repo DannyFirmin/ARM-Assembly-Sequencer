@@ -46,9 +46,9 @@ play_envelope:
   lsr r6, r6, #1 @ Faster way doing divided by 2
   @ Finished sample rate/frequency/2, result in r6, means how many dot
 
-  @ if r11 == r2, go to Release;
+  @ if r11 >= r2, go to Release;
   cmp r2, r11
-  beq release
+  bls release
   @ if r11 <= 30% * r2, go to Attack;
   mov r7, #3
   mul r7, r2, r7
@@ -56,7 +56,12 @@ play_envelope:
   udiv r7, r7, r4 @ r7 is the index of the element in the 30% position
   cmp r11, r7
   bls attack
-  mov r10, r7 @ Store the value of r7, will use in the next stage for calculate the difference between this index in different stage
+  @ Check if it just finished the decay part, if yeet, we have something important to store
+  mov r4, r11
+  sub r4, #1
+  cmp r4, r7
+  IT eq
+  bleq just_finish_a_stage
 
   @ if 30% * r2 < r11 <= 50% * r2, go to Decay;
   mov r7, #5
@@ -65,11 +70,21 @@ play_envelope:
   udiv r7, r7, r4 @ r7 is the index of the element in the 50% position. I will use this in the later code
   cmp r11, r7
   beq decay
-  mov r10, r7 @ Store the value of r7, will use in the next stage for calculate the difference between this index in different stage
+  @ Check if it just finished the decay part, if yeet, we have something important to store
+  mov r4, r11
+  sub r4, #1
+  cmp r4, r7
+  IT eq
+  bleq just_finish_a_stage
 
   @ if 50% * r2 < r11 < 100% * r2 go to Sustain. 
   mov r7, r2 @ Need to use r7 in the later calculation
   b sustain
+
+just_finish_a_stage:
+  mov r10, r7 @ Store the value of r7, will use in the next stage for calculate the difference between this index in different stage
+  mov r9, r11 @ Store the changing point
+  bx lr
 
 attack:
   mov r5, 0 @ init dot counter
@@ -99,7 +114,8 @@ decay: @ Decay 30% from the max, so the Amplitude will gradually change to 0x598
   mov r4, #9825 @ Amplitude total negative growth. 0x7FEE - (0x7FEE * 70%) = 9825
   sub r7, r10 @ Calculate the differece of r7 between this stage and previous stage, the result indicates when I should finish my negative growth
   udiv r4, r4, r7 @ Amplitude negative growth per each wave
-  mul r4, r11 @ Amplitude negative growth per each wave * Current wave count
+  sub r9, r11, r9 @ r9 is the wave index in current stage
+  mul r4, r9 @ Amplitude negative growth per each wave * Current wave count
   sub r0, r4 @ dot upper part of the wave, wave become weaker and weaker
   push {r6} @ r6 needs to be used for drawing lower dot as well, store it
   bl dot
@@ -109,7 +125,7 @@ decay: @ Decay 30% from the max, so the Amplitude will gradually change to 0x598
   mov r0, 0x8011 @ init amplitude to be at the min amplitude
   mov r4, #9825 @ Amplitude total negative growth. Explained already
   udiv r4, r4, r7 @ Amplitude negative growth per each wave
-  mul r4, r11 @ Amplitude negative growth per each wave * Current wave count
+  mul r4, r9 @ Amplitude negative growth per each wave * Current wave count
   add r0, r4 @ dot lower part of the wave, wave become weaker and weaker
   bl dot
   pop {r0-r10,lr}
@@ -140,7 +156,8 @@ release: @ the Amplitude will gradually change from 0x598D or 0xA672 to +10 or -
   mov r0, 0x598D
   mov r4, #22915
   udiv r4, r4, r7 @ Amplitude negative growth per each wave
-  mul r4, r11 @ Amplitude negative growth per each wave * Current wave count
+  sub r9, r11, r2 @ r9 is the wave index in current stage
+  mul r4, r9 @ Amplitude negative growth per each wave * Current wave count
   sub r0, r4 @ dot upper part of the wave, wave become weaker and weaker
   push {r6} @ r6 needs to be used for drawing lower dot as well, store it
   bl dot
@@ -150,7 +167,8 @@ release: @ the Amplitude will gradually change from 0x598D or 0xA672 to +10 or -
   mov r0, 0xA672 @ init amplitude to be -10
   mov r4, #22915 @ Amplitude total growth. From 0xFFF5 to 0x8011; 0xFFF5 - 0x8011 = 32740
   udiv r4, r4, r7 @ Amplitude growth per each wave
-  mul r4, r11 @ Amplitude growth per each wave * Current wave count
+  sub r9, r11, r2
+  mul r4, r9 @ Amplitude growth per each wave * Current wave count
   add r0, r4 @ dot lower part of the wave, wave become weaker and weaker
   bl dot
   pop {r0-r10,lr}
@@ -189,9 +207,11 @@ rest_end:
 pitch_array:
 @ First element in array in the size
 @ Pitch_array is made of frequency(Hz)
-  .word 51,0,392,0,392,0,440,0,392,0,523,0,494,0,392,0,392,0,440,0,392,0,587,0,523,0,392,0,392,0,784,0,659,0,523,0,494,0,440,0,698,0,698,0,659,0,523,0,587,0,523,0 
+  .word 50,392,0,392,0,440,0,392,0,523,0,494,0,392,0,392,0,440,0,392,0,587,0,523,0,392,0,392,0,784,0,659,0,523,0,494,0,440,0,698,0,698,0,659,0,523,0,587,0,523,0 
 duration_array:
 @ First element in array in the size
 @ For a normal note, it's a duration divisor, 4 means play for 0.25s, 2 means 0.5s, 1 means 1s
 @ For a rest note, it's a duration counter, 12000 means rest for 0.25s, 24000 means rest for 0.5s, 48000 means rest for 1s
-  .word 51,12000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,4,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000
+  .word 50,1,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,4,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000
+
+memory:
