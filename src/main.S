@@ -31,7 +31,6 @@ loop:
   bhi myinit @ play the music again
   b loop
 
-
 @ This function is used for playing a note with Envelope
 @ ADSR Envelope. Play Attack for 30% of the note time. Play Decay for 20% of the note time
 @ Sustain time: 50%, Release time: extra 20% of the note time
@@ -39,7 +38,6 @@ loop:
 @ r1 = 0 means Rest
 play_envelope:
   push {r0-r10,lr}
-
   @ Start doing sample rate/frequency/2
   mov r4, #48000
   udiv r6, r4, r1 
@@ -79,7 +77,6 @@ play_envelope:
 
   @ if 50% * r2 < r11 < 100% * r2 go to Sustain. 
   mov r7, r2 @ Need to use r7 in the later calculation
-
   @ Check if it just finished the sustain part, if yeet, we have something important to store
   mov r4, r11
   add r4, #1
@@ -201,6 +198,7 @@ release: @ the Amplitude will gradually change from 0x598D or 0xA672 to +10 or -
 play_end:
   pop {r0-r10,lr}
   bx lr
+
 dot:
   @ Start ploting based on r6
   push {lr}
@@ -226,18 +224,18 @@ rest_end:
   bhi myinit
   b loop
 
-
 .size main, .-main
 
 .data
 pitch_array:
 @ First element in array in the size
 @ Pitch_array is made of frequency(Hz)
-  .word 51,0,392,0,392,0,440,0,392,0,523,0,494,0,392,0,392,0,440,0,392,0,587,0,523,0,392,0,392,0,784,0,659,0,523,0,494,0,440,0,698,0,698,0,659,0,523,0,587,0,523,0 
+  .word 50,392,0,392,0,440,0,392,0,523,0,494,0,392,0,392,0,440,0,392,0,587,0,523,0,392,0,392,0,784,0,659,0,523,0,494,0,440,0,698,0,698,0,659,0,523,0,587,0,523,0 
 duration_array:
 @ First element in array in the size
 @ For a normal note, it's a duration divisor, 4 means play for 0.25s, 2 means 0.5s, 1 means 1s
 @ For a rest note, it's a duration counter, 12000 means rest for 0.25s, 24000 means rest for 0.5s, 48000 means rest for 1s
-  .word 51,12000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,4,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000
+  .word 50,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,4,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000
 
 my_memory:
+@ Remember me, Though I have to say goodbye
