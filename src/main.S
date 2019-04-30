@@ -238,4 +238,4 @@ duration_array:
   .word 50,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,4,12000,1,24000,4,12000,4,12000,2,12000,2,12000,2,12000,1,24000
 
 my_memory:
-@ Remember me, Though I have to say goodbye
+@ The memory address of this label will be used to store important information
