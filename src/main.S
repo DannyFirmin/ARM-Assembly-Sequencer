@@ -5,7 +5,8 @@
 .type main, %function
 
 main:
-  bl init
+  bl init @ init discoboard’s headphone jack
+.size main, .-main
 
 myinit:
   ldr r0, =pitch_array @ Base address of the array
@@ -223,8 +224,6 @@ rest_end:
   cmp r6, r5
   bhi myinit
   b loop
-
-.size main, .-main
 
 .data
 pitch_array:
